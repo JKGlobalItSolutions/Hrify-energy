@@ -4,7 +4,6 @@ import Footer from './components/Footer.jsx';
 import Home from './pages/Home.jsx';
 import SolarCalculator from './pages/SolarCalculator.jsx';
 import Contact from './pages/Contact.jsx';
-import Contacts from './pages/Contact.jsx';
 import FreeHomeVisit from './pages/FreeHomeVisit.jsx';
 import PersonalizedQuote from './pages/PersonalizedQuote.jsx';
 import GovtPaperwork from './pages/GovtPaperwork.jsx';
@@ -14,13 +13,13 @@ import RedeemSubsidy from './pages/RedeemSubsidy.jsx';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Hrify-energy">
       <div className="app">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/calculator" element={<SolarCalculator />} />
-          <Route path="/contact" element={<Contacts />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/free-home-visit" element={<FreeHomeVisit />} />
           <Route path="/personalized-quote" element={<PersonalizedQuote />} />
           <Route path="/govt-paperwork" element={<GovtPaperwork />} />
