@@ -2,7 +2,7 @@
   "name": "hrify-energy-clone",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://JKGlobalItSolutions.github.io/Hrify-energy",
+  "homepage": "https://JKGlobalItSolutions.github.io/Hrify-energy/",
   "type": "module",
   "scripts": {
     "dev": "vite",

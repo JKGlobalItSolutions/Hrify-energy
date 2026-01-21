@@ -13,7 +13,7 @@ import RedeemSubsidy from './pages/RedeemSubsidy.jsx';
 
 function App() {
   return (
-    <Router basename="/Hrify-energy">
+    <Router basename="/Hrify-energy/">
       <div className="app">
         <Navbar />
         <Routes>
