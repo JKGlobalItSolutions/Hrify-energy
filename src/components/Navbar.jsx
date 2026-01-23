@@ -30,6 +30,18 @@ const Navbar = () => {
           {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
 
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              className="mobile-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeMobileMenu}
+            />
+          )}
+        </AnimatePresence>
+
         <ul className={`navbar-menu ${mobileMenuOpen ? 'open' : ''}`}>
           <li><Link to="/" className="nav-link" onClick={closeMobileMenu}>Home</Link></li>
           <li

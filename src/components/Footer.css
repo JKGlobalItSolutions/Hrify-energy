@@ -109,10 +109,29 @@
     flex-direction: column;
     text-align: center;
     gap: 30px;
+    align-items: center;
+  }
+
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .footer-logo {
+    margin: 0 auto 20px auto;
   }
 
   .footer-right {
     text-align: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .footer-info {
+    text-align: center;
+    max-width: 100%;
   }
 
   .footer-social {
