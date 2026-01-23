@@ -1,29 +1,55 @@
+import { motion } from 'framer-motion';
 import '../styles/serviceDetail.css';
 import Banner_8 from '../../assets/Banner_8.png';
 import img_8 from '../../assets/img_8.png';
 
 const RedeemSubsidy = () => {
+    const fadeInUp = {
+        initial: { opacity: 0, y: 30 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true },
+        transition: { duration: 0.6 }
+    };
+
     return (
         <main className="sd-main">
             {/* Hero Section */}
-            <section className="sd-hero">
+            <motion.section
+                className="sd-hero"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+            >
                 <div className="sd-hero-container">
                     <img src={Banner_8} alt="Redeem your Subsidy Hero" className="sd-hero-img" />
                 </div>
-            </section>
+            </motion.section>
 
             {/* Header Banner */}
             <section className="sd-header-banner">
                 <div className="container">
-                    <h1 className="sd-title">Redeem your Subsidy</h1>
+                    <motion.h1
+                        className="sd-title"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        Redeem your Subsidy
+                    </motion.h1>
                 </div>
-                <div className="sd-blue-banner">
+                <motion.div
+                    className="sd-blue-banner"
+                    initial={{ opacity: 0, scaleX: 0 }}
+                    animate={{ opacity: 1, scaleX: 1 }}
+                    transition={{ duration: 0.8 }}
+                    style={{ originX: 0.5 }}
+                >
                     <p>Maximum Savings. Minimum Effort</p>
-                </div>
+                </motion.div>
             </section>
 
             {/* Description Section */}
-            <section className="sd-description">
+            <motion.section className="sd-description" {...fadeInUp}>
                 <div className="container">
                     <div className="sd-description-box">
                         <p>
@@ -33,25 +59,37 @@ const RedeemSubsidy = () => {
                         </p>
                     </div>
                 </div>
-            </section>
+            </motion.section>
 
             {/* Content Section */}
             <section className="sd-content-section">
                 <div className="container">
                     <div className="sd-grid">
-                        <div className="sd-text-content">
+                        <motion.div
+                            className="sd-text-content"
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                        >
                             <h3>Benefits of Redeeming Your Subsidy</h3>
                             <br />
                             <p>• Lower upfront installation cost</p>
                             <p>• Faster return on investment</p>
                             <p>• Increased affordability of solar adoption</p>
                             <p>• Government-approved and compliant systems</p>
-                        </div>
-                        <div className="sd-features-right">
+                        </motion.div>
+                        <motion.div
+                            className="sd-features-right"
+                            initial={{ opacity: 0, x: 30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                        >
                             <div className="sd-img-wrapper">
                                 <img src={img_8} alt="Subsidy Benefits Illustration" />
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </section>

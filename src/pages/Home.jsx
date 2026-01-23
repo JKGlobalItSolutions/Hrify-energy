@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero.jsx';
+import { motion } from 'framer-motion';
 import {
   Check,
   Sun,
@@ -22,12 +23,28 @@ import md_image from '../../assets/FirstPage/md_image.png';
 import hrifysmalllogo from '../../assets/FirstPage/hrifysmalllogo.jpg';
 
 const Home = () => {
+  const fadeInUp = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.6 }
+  };
+
+  const staggerContainer = {
+    initial: {},
+    whileInView: { transition: { staggerChildren: 0.2 } },
+    viewport: { once: true }
+  };
+
   return (
     <main>
       <Hero />
 
       {/* About Section */}
-      <section className="about-intro">
+      <motion.section
+        className="about-intro"
+        {...fadeInUp}
+      >
         <div className="container">
           <p className="about-text-bold"> <br /> <br />
             Hrify Energy Business is a trusted solar energy solutions provider, committed to
@@ -40,95 +57,110 @@ const Home = () => {
             <Link to="/contact" className="btn btn-consultation">Get a Free Solar Consultation</Link>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Stats Cards Section */}
       <section className="stats-section">
         <div className="container">
-          <div className="stats-grid">
-            <div className="stat-card cyan-card">
-              <div className="stat-icon-wrapper">
-                <HomeIcon className="stat-icon" size={24} />
-              </div>
-              <div className="stat-info">
-                <h3>500+</h3>
-                <p>Happy Homes</p>
-              </div>
-            </div>
-            <div className="stat-card cyan-card">
-              <div className="stat-icon-wrapper">
-                <Lightbulb className="stat-icon" size={24} />
-              </div>
-              <div className="stat-info">
-                <h3>95% less</h3>
-                <p>Electricity bills</p>
-              </div>
-            </div>
-            <div className="stat-card cyan-card">
-              <div className="stat-icon-wrapper">
-                <ShieldCheck className="stat-icon" size={24} />
-              </div>
-              <div className="stat-info">
-                <h3>25+ yrs</h3>
-                <p>Panel Warranty</p>
-              </div>
-            </div>
-          </div>
+          <motion.div
+            className="stats-grid"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true }}
+          >
+            {[
+              { icon: <HomeIcon size={24} />, count: "500+", label: "Happy Homes" },
+              { icon: <Lightbulb size={24} />, count: "95% less", label: "Electricity bills" },
+              { icon: <ShieldCheck size={24} />, count: "25+ yrs", label: "Panel Warranty" }
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                className="stat-card cyan-card"
+                variants={fadeInUp}
+              >
+                <div className="stat-icon-wrapper">
+                  {stat.icon}
+                </div>
+                <div className="stat-info">
+                  <h3>{stat.count}</h3>
+                  <p>{stat.label}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
       {/* Services Section */}
       <section className="services-section">
         <div className="container">
-          <div className="service-list">
-            <div className="service-card">
-              <div className="service-header">
-                <Sun size={18} /> <span>Residential Solar Systems</span>
-              </div>
-              <div className="service-body">
-                <p className="service-highlight">Custom solar solutions designed to power your home efficiently, reduce monthly electricity bills, and increase long-term savings.</p>
-              </div>
-            </div>
-
-            <div className="service-card">
-              <div className="service-header">
-                <Building2 size={18} /> <span>Commercial & Industrial Solar</span>
-              </div>
-              <div className="service-body">
-                <p className="service-highlight">High-capacity solar installations for offices, factories, and commercial spaces to improve energy efficiency and sustainability.</p>
-              </div>
-            </div>
-
-            <div className="service-card">
-              <div className="service-header">
-                <LayoutGrid size={18} /> <span>Solar Rooftop Solutions</span>
-              </div>
-              <div className="service-body">
-                <p className="service-highlight">Space-optimized rooftop solar systems with maximum energy output and long-term reliability.</p>
-              </div>
-            </div>
-
-            <div className="service-card">
-              <div className="service-header">
-                <Settings size={18} /> <span>Solar Installation & Maintenance</span>
-              </div>
-              <div className="service-body">
-                <p className="service-highlight">End-to-end services including site inspection, system design, installation, and ongoing maintenance support.</p>
-              </div>
-            </div>
-          </div>
+          <motion.div
+            className="service-list"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true }}
+          >
+            {[
+              {
+                icon: <Sun size={18} />,
+                title: "Residential Solar Systems",
+                text: "Custom solar solutions designed to power your home efficiently, reduce monthly electricity bills, and increase long-term savings."
+              },
+              {
+                icon: <Building2 size={18} />,
+                title: "Commercial & Industrial Solar",
+                text: "High-capacity solar installations for offices, factories, and commercial spaces to improve energy efficiency and sustainability."
+              },
+              {
+                icon: <LayoutGrid size={18} />,
+                title: "Solar Rooftop Solutions",
+                text: "Space-optimized rooftop solar systems with maximum energy output and long-term reliability."
+              },
+              {
+                icon: <Settings size={18} />,
+                title: "Solar Installation & Maintenance",
+                text: "End-to-end services including site inspection, system design, installation, and ongoing maintenance support."
+              }
+            ].map((service, index) => (
+              <motion.div
+                key={index}
+                className="service-card"
+                variants={fadeInUp}
+              >
+                <div className="service-header">
+                  {service.icon} <span>{service.title}</span>
+                </div>
+                <div className="service-body">
+                  <p className="service-highlight">{service.text}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
       {/* Product Gallery */}
       <section className="gallery-section">
         <div className="container">
-          <div className="gallery-row">
-            <div className="gallery-image-box"><img src={Img1} alt="Solar Panel 1" /></div>
-            <div className="gallery-image-box"><img src={img2} alt="Solar Panel 2" /></div>
-            <div className="gallery-image-box"><img src={img3} alt="Solar Panel 3" /></div>
-            <div className="gallery-image-box"><img src={img4} alt="Solar Panel 4" /></div>
-          </div>
+          <motion.div
+            className="gallery-row"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true }}
+          >
+            {[Img1, img2, img3, img4].map((img, index) => (
+              <motion.div
+                key={index}
+                className="gallery-image-box"
+                variants={fadeInUp}
+              >
+                <img src={img} alt={`Solar Panel ${index + 1}`} />
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
@@ -136,7 +168,13 @@ const Home = () => {
       <section className="why-choose-section">
         <div className="container">
           <div className="why-choose-flex">
-            <div className="why-choose-text">
+            <motion.div
+              className="why-choose-text"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
               <h2>Why Choose Hrify Energy Business?</h2>
               <ul className="why-choose-bullet">
                 <li><Check size={16} /> High-quality solar panels & inverters</li>
@@ -145,10 +183,16 @@ const Home = () => {
                 <li><Check size={16} /> On-time installation & reliable service</li>
                 <li><Check size={16} /> Eco-friendly & government-approved systems</li>
               </ul>
-            </div>
-            <div className="why-choose-visual">
+            </motion.div>
+            <motion.div
+              className="why-choose-visual"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
               <img src={WhyChooseEnergyBusiness} alt="Why Choose Us Graphic" />
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -157,7 +201,10 @@ const Home = () => {
       <section className="md-section">
         <div className="container">
           <div className="md-grid">
-            <div className="md-profile">
+            <motion.div
+              className="md-profile"
+              {...fadeInUp}
+            >
               <div className="md-image-container">
                 <img src={md_image} alt="Managing Director" className="md-image" />
               </div>
@@ -166,16 +213,28 @@ const Home = () => {
                 <p className="md-title">Managing Director</p>
                 <img src={hrifysmalllogo} alt="Hrify Logo" className="md-hrify-logo" />
               </div>
-            </div>
+            </motion.div>
             <div className="md-vision-mission">
-              <div className="vm-item">
+              <motion.div
+                className="vm-item"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
                 <h3 className="vm-heading">VISION</h3>
                 <p>To become a leading solar energy company by empowering communities and businesses with innovative and reliable solar power solutions.</p>
-              </div>
-              <div className="vm-item">
+              </motion.div>
+              <motion.div
+                className="vm-item"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
                 <h3 className="vm-heading">MISSION</h3>
                 <p>To make clean and renewable solar energy accessible and affordable for everyone, while promoting sustainable living and energy independence.</p>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>

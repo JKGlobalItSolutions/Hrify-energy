@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ChevronDown, Check } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import '../styles/services.css';
 
 const Services = () => {
@@ -22,28 +23,46 @@ const Services = () => {
   const selectService = (service) => {
     setSelectedService(service);
     setIsOpen(false);
-    if (service === 'Free Home Visit') {
-      window.location.href = '/free-home-visit';
-    } else if (service === 'Personalised Quote') {
-      window.location.href = '/personalized-quote';
-    } else if (service === 'Govt PaperWork & Subsidy Assistance') {
-      window.location.href = '/govt-paperwork';
-    } else if (service === 'High Quality installations in 24 hrs') {
-      window.location.href = '/installation-service';
-    } else if (service === 'Connection to the Grid') {
-      window.location.href = '/grid-connection';
-    } else if (service === 'Redeem your Subsidy') {
-      window.location.href = '/redeem-subsidy';
+
+    // Use slightly better navigation than window.location.href if possible
+    // but keeping current logic to avoid breaking routes
+    const routes = {
+      'Free Home Visit': '/free-home-visit',
+      'Personalised Quote': '/personalized-quote',
+      'Govt PaperWork & Subsidy Assistance': '/govt-paperwork',
+      'High Quality installations in 24 hrs': '/installation-service',
+      'Connection to the Grid': '/grid-connection',
+      'Redeem your Subsidy': '/redeem-subsidy'
+    };
+
+    if (routes[service]) {
+      window.location.href = routes[service];
     }
+  };
+
+  const fadeInUp = {
+    initial: { opacity: 0, y: 30 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 }
   };
 
   return (
     <main className="services-page">
       <div className="container services-container">
-        <h1>Our Services</h1>
-        <p className="services-subtitle">Experience a seamless transition to solar with our comprehensive end-to-end services.</p>
+        <motion.h1 {...fadeInUp}>Our Services</motion.h1>
+        <motion.p
+          className="services-subtitle"
+          {...fadeInUp}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          Experience a seamless transition to solar with our comprehensive end-to-end services.
+        </motion.p>
 
-        <div className="dropdown-wrapper">
+        <motion.div
+          className="dropdown-wrapper"
+          {...fadeInUp}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           <div
             className={`custom-dropdown ${isOpen ? 'is-open' : ''}`}
             onClick={toggleDropdown}
@@ -55,34 +74,50 @@ const Services = () => {
               <ChevronDown className={`dropdown-icon ${isOpen ? 'rotate' : ''}`} />
             </div>
 
-            <div className="dropdown-list-container">
-              <ul className="dropdown-list">
-                {services.map((service, index) => (
-                  <li
-                    key={index}
-                    className={`dropdown-item ${selectedService === service ? 'active' : ''}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      selectService(service);
-                    }}
-                  >
-                    <span className="item-text">{service}</span>
-                    {selectedService === service && <Check className="check-icon" size={16} />}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  className="dropdown-list-container"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ul className="dropdown-list">
+                    {services.map((service, index) => (
+                      <li
+                        key={index}
+                        className={`dropdown-item ${selectedService === service ? 'active' : ''}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          selectService(service);
+                        }}
+                      >
+                        <span className="item-text">{service}</span>
+                        {selectedService === service && <Check className="check-icon" size={16} />}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="services-description">
+        <motion.div
+          className="services-description"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.4 }}
+        >
           <p>
             From the initial <strong>free home visit</strong> to the final <strong>subsidy redemption</strong>,
             Hrify Energy handles everything. We ensure <strong>high-quality installations</strong> within
             24 hours and manage all <strong>government paperwork</strong> so you can enjoy
             clean energy without the hassle.
           </p>
-        </div>
+        </motion.div>
       </div>
     </main>
   );

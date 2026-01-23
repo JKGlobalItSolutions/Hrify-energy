@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import '../styles/contact.css';
+import img from '../../assets/img_1.png'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -23,16 +25,34 @@ const Contact = () => {
     alert('Thank you for booking! We will contact you soon.');
   };
 
+  const fadeInUp = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.6 }
+  };
+
   return (
     <main className="contact-main">
       <div className="container contact-container">
-        <div className="contact-header">
+        <motion.div
+          className="contact-header"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <h1>Book a Free Home Visit today!</h1>
           <p>Schedule a FREE solar consultation at home!</p>
-        </div>
+        </motion.div>
 
         <div className="contact-grid">
-          <div className="contact-form-box">
+          <motion.div
+            className="contact-form-box"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <p className="form-tagline">We're here to help - Reach out anytime</p>
             <form onSubmit={handleSubmit}>
               <div className="form-row">
@@ -89,11 +109,17 @@ const Contact = () => {
                 <label htmlFor="agreed">I agree to the Terms and Condition</label>
               </div>
             </form>
-          </div>
+          </motion.div>
 
-          <div className="contact-image-box">
-            <img src="/assets/SecondPage/img_3.png" alt="Solar Technicians" />
-          </div>
+          <motion.div
+            className="contact-image-box"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <img src={img} alt="Solar Technicians" />
+          </motion.div>
         </div>
       </div>
     </main>

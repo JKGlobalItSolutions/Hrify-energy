@@ -33,7 +33,6 @@
     height: 100%;
     object-fit: cover;
     filter: contrast(1.05) saturate(1.05);
-    /* Enhance clarity */
 }
 
 .sd-hero-overlay-text {
@@ -128,17 +127,34 @@
 @media (max-width: 768px) {
     .sd-grid {
         grid-template-columns: 1fr;
+        gap: 25px;
     }
 
     .sd-hero-container {
-        height: 300px;
+        height: 250px;
     }
 
     .sd-hero-overlay-text {
-        font-size: 32px;
+        font-size: 24px;
+        padding: 0 15px;
     }
 
     .sd-title {
-        font-size: 28px;
+        font-size: 24px;
+        padding: 0 15px;
+    }
+
+    .sd-blue-banner {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    .sd-description-box {
+        padding: 20px;
+    }
+
+    .sd-text-content {
+        font-size: 15px;
+        text-align: center;
     }
 }

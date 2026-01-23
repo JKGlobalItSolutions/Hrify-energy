@@ -114,6 +114,18 @@
 }
 
 @media (max-width: 768px) {
+  .contact-main {
+    padding: 30px 15px;
+  }
+
+  .contact-header h1 {
+    font-size: 24px;
+  }
+
+  .contact-header p {
+    font-size: 16px;
+  }
+
   .contact-grid {
     flex-direction: column;
   }
@@ -124,9 +136,14 @@
 
   .form-row {
     flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-submit {
+    width: 100%;
   }
 
   .contact-image-box {
-    height: 300px;
+    height: 250px;
   }
 }
